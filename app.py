@@ -59,40 +59,81 @@ def getMax(cases_dict):
     return max_val, diff_dict[max_val]
 
 
+def peak(val_type, func_name):
+    """
+    This method does all the job of searching for the data and retrieving it.
+    :param val_type: cases / recovered / deaths - by the user choice.
+    :param func_name: the method the user entered.
+    :return: the data scrape from the API.
+    """
+    country = findCountry()
+    peaks = getPeaks(country)
+    if peaks.status_code == 404:
+        return {}
+    else:
+        new_cases = json.loads(peaks.text)["timeline"][val_type]
+        date, value = getMax(new_cases)
+        return {"country": country, "method": func_name, "date": date, "value": value}
+
+
 class NewCasesPeak(Resource):
+    """
+    Class to handle request of New Cases Peak.
+    """
     def get(self):
-        country = findCountry()
-        peaks = getPeaks(country)
-        if peaks.status_code == 404:
-            return {}
-        else:
-            new_cases = json.loads(peaks.text)["timeline"]["cases"]
-            date, value = getMax(new_cases)
-            return {"country": country, "method": self.__class__.__name__, "date": date, "value": value}
+        """
+        Get data about New Cases Peak, using another function to retrieve it.
+        :return: the max value + date.
+        """
+        return peak("cases", self.__class__.__name__)
+        # country = findCountry()
+        # peaks = getPeaks(country)
+        # if peaks.status_code == 404:
+        #     return {}
+        # else:
+        #     new_cases = json.loads(peaks.text)["timeline"]["cases"]
+        #     date, value = getMax(new_cases)
+        #     return {"country": country, "method": self.__class__.__name__, "date": date, "value": value}
 
 
 class RecoveredPeak(Resource):
+    """
+    Class to handle request of Recovered Peak.
+    """
     def get(self):
-        country = findCountry()
-        peaks = getPeaks(country)
-        if peaks.status_code == 404:
-            return {}
-        else:
-            recovered = json.loads(peaks.text)["timeline"]["recovered"]
-            date, value = getMax(recovered)
-        return {"country": country, "method": self.__class__.__name__, "date": date, "value": value}
+        """
+        Get data about Recovered Peak, using another function to retrieve it.
+        :return: the max value + date.
+        """
+        return peak("recovered", self.__class__.__name__)
+        # country = findCountry()
+        # peaks = getPeaks(country)
+        # if peaks.status_code == 404:
+        #     return {}
+        # else:
+        #     recovered = json.loads(peaks.text)["timeline"]["recovered"]
+        #     date, value = getMax(recovered)
+        # return {"country": country, "method": self.__class__.__name__, "date": date, "value": value}
 
 
 class DeathsPeak(Resource):
+    """
+    Class to handle request of Deaths Peak.
+    """
     def get(self):
-        country = findCountry()
-        peaks = getPeaks(country)
-        if peaks.status_code == 404:
-            return {}
-        else:
-            deaths = json.loads(peaks.text)["timeline"]["deaths"]
-            date, value = getMax(deaths)
-        return jsonify({"country": country, "method": self.__class__.__name__, "date": date, "value": value})
+        """
+        Get data about Deaths Peak, using another function to retrieve it.
+        :return: the max value + date.
+        """
+        return peak("deaths", self.__class__.__name__)
+        # country = findCountry()
+        # peaks = getPeaks(country)
+        # if peaks.status_code == 404:
+        #     return {}
+        # else:
+        #     deaths = json.loads(peaks.text)["timeline"]["deaths"]
+        #     date, value = getMax(deaths)
+        # return jsonify({"country": country, "method": self.__class__.__name__, "date": date, "value": value})
 
 
 class Status(Resource):
