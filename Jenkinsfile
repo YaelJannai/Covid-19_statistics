@@ -32,10 +32,11 @@ pipeline {
                         }
                     }
                 }
-				stage('Test') {
+		stage('Test') {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh 'curl -i localhost:5000/status'
+                            	sh 'sleep 2'
+				sh 'curl -i localhost:5000/status'
                         }
                     }
                 }
