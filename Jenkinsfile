@@ -5,7 +5,11 @@
  */
 
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.8.6'
+        }
+    }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
             steps {
