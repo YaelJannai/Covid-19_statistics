@@ -44,17 +44,11 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
+                            sh 'exit 0'
                         }
                     }
                 }
             }
         }
     }
-    post {
-		always {
-			steps {
-				sh 'exit 0'
-			}
-		}
-	}
 }
