@@ -26,13 +26,18 @@ pipeline {
         stage('Run') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'python app.py'
+                    script {
+                        echo 'curl localhost:5000/status'
+                        sh 'python app.py'
+                        sh 'curl "https://disease.sh/v3/covid-19/historical/israel?lastdays=30"'
+                    }
                 }
             }
             post {
                 always {
                     script {
-                        echo 'post'
+                        echo 'curl localhost:5000/status'
+                        sh 'curl "https://disease.sh/v3/covid-19/historical/israel?lastdays=30"'
                     }
                 }
             }
