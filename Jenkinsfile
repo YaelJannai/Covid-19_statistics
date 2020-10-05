@@ -36,11 +36,16 @@ pipeline {
                         }
                     }
                 }
-		stage('Test') {
+		        stage('Test') {
                     steps {
                         sh 'sleep 2'
-			sh "curl localhost:5000/${params.Value1}"
-			sh "curl localhost:5000/${params.Value2}"
+                        script {
+                            def item1 = "${params.Value1}"
+                            def item2 = "${params.Value2}"
+                            sh "curl localhost:5000/${item1}"
+                            sh "curl localhost:5000/${item2}"
+                            }
+                        }
                     }
                 }
             }
