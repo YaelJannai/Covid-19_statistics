@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
             steps {
-                git branch: 'main', credentialsId: 'git_credentials', url: 'https://github.com/YaelJannai/Covid-19_statistics.git'
+                git branch: 'main', url: 'https://github.com/YaelJannai/Covid-19_statistics.git'
             }
         }
         stage('Setup') { // Install any dependencies you need to perform testing
