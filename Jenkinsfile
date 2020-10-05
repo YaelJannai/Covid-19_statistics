@@ -35,7 +35,8 @@ pipeline {
                 }
                 stage('Test') {
                     steps {
-                        sh 'curl 'localhost:5000/status''
+                        echo 'curl localhost:5000/status'
+                        sh 'curl localhost:5000/status'
                     }
                 }
             }
