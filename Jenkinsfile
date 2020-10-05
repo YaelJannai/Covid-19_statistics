@@ -28,17 +28,18 @@ pipeline {
                 stage('Server') {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh 'python app.py &'
+                            sh 'python app.py'
                         }
                     }
                 }
-                stage('Test') {
-					withEnv(["HOME=${env.WORKSPACE}"]) {
-						steps {
-							sh 'curl -i localhost:5000/status'
-						}
-					}
+				stage('Test') {
+                    steps {
+                        withEnv(["HOME=${env.WORKSPACE}"]) {
+                            sh 'curl -i localhost:5000/status'
+                        }
+                    }
                 }
+
             }
         }
     }
