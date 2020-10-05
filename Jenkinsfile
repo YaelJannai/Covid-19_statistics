@@ -11,8 +11,7 @@ pipeline {
         }
     }
     parameters {
-        string(name: 'Value1', defaultValue: 'status', description: '')
-        string(name: 'Value2', defaultValue: 'newCasesPeak?country=spain', description: '')
+        string(name: 'Values', defaultValue: 'status|newCasesPeak?country=israel', description: '')
     }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
@@ -40,10 +39,11 @@ pipeline {
                     steps {
                         sh 'sleep 2'
                         script {
-                            def item1 = "${params.Value1}"
-                            def item2 = "${params.Value2}"
-                            sh "curl localhost:5000/${item1}"
-                            sh "curl localhost:5000/${item2}"
+                            def list = "${params.Values}".split('|')
+                            for (int i = 0; i < list.size(); i++) {
+                                def item = list[i]
+                                sh "curl localhost:5000/${item}"
+                            }
                         }
                     }
                 }
