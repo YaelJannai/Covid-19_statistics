@@ -11,7 +11,7 @@ pipeline {
         }
     }
     parameters {
-        string(name: 'Values', defaultValue: '', description: '')
+        string(name: 'Values', defaultValue: 'status', description: '')
     }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
@@ -39,11 +39,9 @@ pipeline {
                     steps {
                         sh 'sleep 2'
                         script {
-                            def list = "${params.Values}.split('|')"
-				echo "${list}"
+                            def list = "${params.Values}".tokenize(',') 
                             for (int i = 0; i < list.size(); i++) {
                                 def item = list[i]
-				    echo "${list[i]}"
                                 sh "curl localhost:5000/${item}"
                             }
                         }
