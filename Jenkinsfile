@@ -26,12 +26,11 @@ pipeline {
         }
         stage('Test') {
             steps {
-                def response1 = sh 'curl localhost:8080/newCasesPesdf'
-                def response2 = sh 'curl localhost:8080/newCasesPeak?country=spain'
-                def response3 = sh 'curl localhost:3333/newCasesPeak?country=spain'
-                echo response1
-                echo response2
-                echo response3
+                script {
+                    sh 'curl localhost:8080/newCasesPesdf'
+                    sh 'curl localhost:8080/newCasesPeak?country=spain'
+                    sh 'curl localhost:3333/newCasesPeak?country=spain'
+                }
             }
         }
     }
