@@ -8,7 +8,6 @@ pipeline {
     agent {
         docker {
             image 'python:3.8.6'
-            sh 'nohup /opt/bin/entry_point.sh &'
         }
     }
     stages {
@@ -35,7 +34,6 @@ pipeline {
                 }
                 stage('Test') {
                     steps {
-                        echo 'curl localhost:5000/status'
                         sh 'curl localhost:5000/status'
                     }
                 }
