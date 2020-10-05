@@ -10,6 +10,9 @@ pipeline {
             image 'python:3.8.6'
         }
     }
+    parameters {
+        string(name: 'Values', defaultValue: 'status|newCasesPeak?country=spain', description: '')
+    }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
             steps {
@@ -32,15 +35,18 @@ pipeline {
                         }
                     }
                 }
-		stage('Test') {
+		        stage('Test') {
                     steps {
-			sh 'sleep 2'
-			sh 'curl localhost:5000/newCasesPeak?country=spain'
-			sh 'curl localhost:5000/newCasesPeak?country=israel'
-			sh 'curl localhost:5000/status'
+                        sh 'sleep 2'
+                        script {
+                            def list = "${params.Values}".split('|')
+                            for (int i = 0; i < list.size(); i++) {
+                                def item = list[i]
+                                sh 'curl localhost:5000/${item}'
+                            }
+                        }
                     }
                 }
-
             }
         }
     }
