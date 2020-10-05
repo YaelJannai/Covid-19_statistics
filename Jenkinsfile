@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    pip install --user -r requirements.txt
+                    sh 'virtualenv venv && . venv/Scripts/activate && pip install -r requirements.txt
                     """
                 }
             }
