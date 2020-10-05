@@ -29,6 +29,11 @@ pipeline {
                     sh 'python app.py'
                 }
             }
+            post {
+                script {
+                    echo 'hello'
+                }
+            }
         }
     }
 }
