@@ -39,12 +39,18 @@ pipeline {
                     steps {
                         sh 'sleep 2'
                         script {
-                            def list = "${params.Values}".tokenize(', ') 
+                            def list = "${params.Values}".tokenize(',') 
                             for (int i = 0; i < list.size(); i++) {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
                         }
+                    }
+                }
+                post {
+                    script {
+                        currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+                        sleep(1)   // Interrupt is not blocking and does not take effect immediately.
                     }
                 }
             }
