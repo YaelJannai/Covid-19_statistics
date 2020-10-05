@@ -170,5 +170,4 @@ api.add_resource(Status, '/status')
 api.add_resource(HandleErrors, '/<path:path>', '/')
 
 if __name__ == '__main__':
-    print('hi yael')
     app.run(debug=True, port=5000)
