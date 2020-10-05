@@ -44,7 +44,6 @@ pipeline {
                             def item2 = "${params.Value2}"
                             sh "curl localhost:5000/${item1}"
                             sh "curl localhost:5000/${item2}"
-                            }
                         }
                     }
                 }
