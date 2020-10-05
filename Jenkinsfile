@@ -44,7 +44,8 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-                            sh 'exit 0'
+                            	currentBuild.getRawBuild().getExecutor().interrupt(Result.SUCCESS)
+    				sleep(1)   // Interrupt is not blocking and does not take effect immediately.
                         }
                     }
                 }
