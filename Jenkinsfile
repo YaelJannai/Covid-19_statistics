@@ -1,5 +1,9 @@
 #!/usr/bin/env groovy
 
+/**
+ * Jenkinsfile
+ */
+
 pipeline {
     agent {
         docker {
