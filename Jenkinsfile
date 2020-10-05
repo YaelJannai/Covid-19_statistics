@@ -40,8 +40,10 @@ pipeline {
                         sh 'sleep 2'
                         script {
                             def list = "${params.Values}.split('|')"
+				echo "${list}"
                             for (int i = 0; i < list.size(); i++) {
                                 def item = list[i]
+				    echo "${list[i]}"
                                 sh "curl localhost:5000/${item}"
                             }
                         }
