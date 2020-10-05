@@ -39,7 +39,7 @@ pipeline {
                     steps {
                         sh 'sleep 2'
                         script {
-                            def list = "${params.Values}".tokenize(',') 
+                            def list = "${params.Values}".tokenize(', ') 
                             for (int i = 0; i < list.size(); i++) {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
