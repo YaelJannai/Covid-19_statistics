@@ -35,7 +35,7 @@ pipeline {
                 stage('Test') {
                     steps {
                         echo 'curl localhost:5000/status'
-                        sh 'curl "http://127.0.0.1:5000/status"' 
+                        sh 'curl "localhost:5000/newCasesPeak?country=spain"' 
                     }
                 }
             }
