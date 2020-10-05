@@ -24,20 +24,18 @@ pipeline {
             }
         }
         stage('Run') {
-            steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    script {
-                        echo 'curl localhost:5000/status'
-                        sh 'python app.py'
-                        sh 'curl "https://disease.sh/v3/covid-19/historical/israel?lastdays=30"'
+            parallel {
+                stage('Server') {
+                    steps {
+                        withEnv(["HOME=${env.WORKSPACE}"]) {
+                            sh 'python app.py'
+                        }
                     }
                 }
-            }
-            post {
-                always {
-                    script {
+                stage('Test') {
+                    steps {
                         echo 'curl localhost:5000/status'
-                        sh 'curl "https://disease.sh/v3/covid-19/historical/israel?lastdays=30"'
+                        sh 'curl localhost:5000/status' 
                     }
                 }
             }
