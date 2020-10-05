@@ -17,11 +17,18 @@ pipeline {
                 }
             }
         }
-        stage('test') {
+        stage('Run') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'python app.py'
                 }
+            }
+        }
+        stage('Test') {
+            steps {
+                curl localhost:8080/newCasesPesdf
+                curl localhost:8080/newCasesPeak?country=spain
+                curl localhost:3333/newCasesPeak?country=spain
             }
         }
     }
