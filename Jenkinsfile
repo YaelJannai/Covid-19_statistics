@@ -13,6 +13,8 @@ pipeline {
         stage('Setup') { // Install any dependencies you need to perform testing
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'python3 -m venv env'
+                    sh 'source env/Scripts/activate'
                     sh 'pip3 install --user -r requirements.txt'
                 }
             }
