@@ -19,6 +19,7 @@ pipeline {
         }
         stage('test') {
             steps {
+                sh 'pip3 list'
                 sh 'python app.py'
             }
         }
