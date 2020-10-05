@@ -36,11 +36,9 @@ pipeline {
                         }
                     }
                 }
-		        stage('Test') {
+		stage('Test') {
                     steps {
                         sh 'sleep 2'
-			echo "${params.Value1}"
-			echo "${params.Value2}"
 			sh 'curl localhost:5000/${params.Value1}'
 			sh 'curl localhost:5000/${params.Value2}'
                     }
