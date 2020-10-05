@@ -27,13 +27,13 @@ pipeline {
             parallel {
                 stage('Test') {
                     steps {
-                        sh 'curl localhost:5000/status'
+                        sh 'curl -i localhost:5000/status'
                     }
                 }
                 stage('Server') {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh 'nohup python app.py &'
+                            sh 'python app.py &'
                         }
                     }
                 }
