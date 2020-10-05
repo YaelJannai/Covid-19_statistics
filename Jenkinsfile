@@ -30,8 +30,10 @@ pipeline {
                 }
             }
             post {
-                script {
-                    echo 'hello'
+                always {
+                    script {
+                        echo 'post'
+                    }
                 }
             }
         }
