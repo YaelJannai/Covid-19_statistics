@@ -13,7 +13,7 @@ pipeline {
         stage('Setup') { // Install any dependencies you need to perform testing
             steps {
                 script {
-                    sh 'virtualenv venv && . venv/Scripts/activate && pip install -r requirements.txt'
+                    sh 'pip install --user -r requirements.txt'
                 }
             }
         }
