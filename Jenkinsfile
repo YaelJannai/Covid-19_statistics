@@ -20,7 +20,6 @@ pipeline {
         stage('test') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'pip3 list'
                     sh 'python app.py'
                 }
             }
