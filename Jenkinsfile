@@ -11,7 +11,7 @@ pipeline {
         }
     }
     parameters {
-        string(name: 'Values', defaultValue: 'status|newCasesPeak?country=israel', description: '')
+        string(name: 'Values', defaultValue: '', description: '')
     }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
