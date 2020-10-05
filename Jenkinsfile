@@ -37,6 +37,8 @@ pipeline {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
                             	sh 'sleep 2'
 				sh 'curl localhost:5000/newCasesPeak?country=spain'
+				sh 'curl localhost:5000/newCasesPeak?country=israel'
+				sh 'curl localhost:5000/status'
                         }
                     }
                 }
