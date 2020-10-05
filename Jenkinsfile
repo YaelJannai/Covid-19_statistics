@@ -1,13 +1,13 @@
 pipeline {
     agent {
         docker {
-            image 'python:3.5.1'
+            image 'python:3.8.6'
         }
     }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
             steps {
-                git credentialsId: 'git_credentials', url: 'https://github.com/YaelJannai/Covid-19_statistics.git'
+                git branch: 'main', credentialsId: 'git_credentials', url: 'https://github.com/YaelJannai/Covid-19_statistics.git'
             }
         }
         stage('Setup') { // Install any dependencies you need to perform testing
