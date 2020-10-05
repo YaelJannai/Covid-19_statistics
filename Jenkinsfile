@@ -28,7 +28,7 @@ pipeline {
                 stage('Server') {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh 'python app.py'
+                            sh 'nohup python app.py &'
                         }
                     }
                 }
