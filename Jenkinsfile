@@ -12,10 +12,9 @@ pipeline {
         }
         stage('Setup') { // Install any dependencies you need to perform testing
             steps {
-                script {
-                    withEnv(["HOME=${env.WORKSPACE}"]) {
-                        sh 'pip3 install --user -r requirements.txt
-                    }
+                sh 'pip install flask
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    sh 'pip3 install --user -r requirements.txt
                 }
             }
         }
