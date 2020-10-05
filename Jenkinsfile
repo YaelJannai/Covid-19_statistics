@@ -25,14 +25,10 @@ pipeline {
         }
         stage('Run') {
             steps {
+                echo 'hello'
                 withEnv(["HOME=${env.WORKSPACE}"]) {
+                    echo 'hello'
                     sh 'python app.py'
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
                     echo 'hello'
                 }
             }
