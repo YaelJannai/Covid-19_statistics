@@ -35,8 +35,7 @@ pipeline {
                 }
                 stage('Test') {
                     steps {
-                        echo 'curl 'localhost:5000/status''
-                        //sh 'curl "https://disease.sh/v3/covid-19/historical/israel?lastdays=30"' 
+                        sh 'curl 'localhost:5000/status''
                     }
                 }
             }
