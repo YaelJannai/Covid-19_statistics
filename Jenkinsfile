@@ -13,9 +13,9 @@ pipeline {
         stage('Setup') { // Install any dependencies you need to perform testing
             steps {
                 script {
-                    sh 'virtualenv venv --distribute'
-                    sh 'source venv/Scripts/activate '
-                    sh 'pip install --user -r requirements.txt'
+                    withEnv(["HOME=${env.WORKSPACE}"]) {
+                        sh 'pip install --user -r requirements.txt'
+                    }
                 }
             }
         }
