@@ -14,8 +14,8 @@ The service's job:
 
 
 Examples:
-   - request:     curl localhost:8080/status
+   - request:     curl localhost:5000/status
    - response: 	  {“status”: “success”}
     
-   - request:     curl localhost:8080/deathsPeak?country=spain
+   - request:     curl localhost:5000/deathsPeak?country=spain
    - response:	  {"country": "spain", "method": "RecoveredPeak", "date": "9/30/20", "value": 380}
