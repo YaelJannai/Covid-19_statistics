@@ -23,12 +23,12 @@ Examples for python script:
    
 ## Jenkins Job:
 This job do:
-	**  Clone this git repository
-	**  Start the Python service
-	**  Query the python service with several country values. The request to the service & results for each of the queries will be shown on the job console view in jenkins.
+* Clone this git repository
+* Start the Python service
+* Query the python service with several country values. The request to the service & results for each of the queries will be shown on the job console view in jenkins.
 
 The job gets as input parameters a list of queries separated by comma, and then it executes each query separately one-by-one 
 and print the query and the output to the job's console.
 
 The input is inserted in the following way - 
-status **,** newCasesPeak?country=spain **,** recoveredPeak?country=spain **,** deathsPeak?country=spain
+status**,**newCasesPeak?country=spain**,**recoveredPeak?country=spain**,**deathsPeak?country=spain
