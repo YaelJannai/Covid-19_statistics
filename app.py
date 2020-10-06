@@ -126,12 +126,16 @@ class Status(Resource):
         ret_status = requests.get(check_api).status_code
         # success
         if ret_status == 200:
-             data = '{"status": "succes"}'
+            data = '{"status": "succes"}'
             json_object = json.loads(data)
             return str(json_object)
-            //return {'status': "success"}
+            # mydata = json.loads('{"status": "succes"}')
+            # return str(json.dumps(mydata))
+            # print(mydata)
+            # return str({"status": "success"})
         # fail
-        return {'status': "fail"}
+        return str({'status': "fail"})
+
 
 
 class HandleErrors(Resource):
