@@ -44,10 +44,12 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-                            if( $VALUE1 == $VALUE2 ) {
-                               currentBuild.result = 'SUCCESS'
-                               return
-                            }
+                        }
+                    }
+                    stage('example') {
+                        script {
+                            setBuildResult('SUCCESS')
+                            return
                         }
                     }
                 }
