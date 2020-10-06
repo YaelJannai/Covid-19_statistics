@@ -49,7 +49,7 @@ pipeline {
                                 sh "curl localhost:5000/${item}"
                             }
                             finish = true
-                            if(${finish}) {
+                            if(finish == true) {
                                 currentBuild.result = 'SUCCESS'
                                 return
                             }
