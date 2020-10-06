@@ -38,6 +38,14 @@ pipeline {
                             sh 'python app.py'
                         }
                     }
+                    post {
+                        always {
+                            script{
+                                currentBuild.result = 'SUCCESS'
+                                return
+                            }
+                        }
+                    }                    
                 }
 		        stage('Test') {
                     steps {
@@ -52,15 +60,8 @@ pipeline {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
                             sh '''
                             pkill -9 -f app.py
+                            sleep 5
                             '''
-                        }
-                    }
-                    post {
-                        always {
-                            script{
-                                currentBuild.result = 'SUCCESS'
-                                return
-                            }
                         }
                     }
                 }
