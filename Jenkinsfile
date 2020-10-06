@@ -49,15 +49,9 @@ pipeline {
                                 sh "curl localhost:5000/${item}"
                             }
                             finish = true
-                        }
-                    }
-                    post {
-                        success {
-                            script {
-                                if(finish == true) {
-                                    currentBuild.result = 'SUCCESS'
-                                    return
-                                }
+                            if(${finish}) {
+                                currentBuild.result = 'SUCCESS'
+                                return
                             }
                         }
                     }
