@@ -86,14 +86,7 @@ class NewCasesPeak(Resource):
         :return: the max value + date.
         """
         return peak("cases", self.__class__.__name__)
-        # country = findCountry()
-        # peaks = getPeaks(country)
-        # if peaks.status_code == 404:
-        #     return {}
-        # else:
-        #     new_cases = json.loads(peaks.text)["timeline"]["cases"]
-        #     date, value = getMax(new_cases)
-        #     return {"country": country, "method": self.__class__.__name__, "date": date, "value": value}
+
 
 
 class RecoveredPeak(Resource):
@@ -106,14 +99,7 @@ class RecoveredPeak(Resource):
         :return: the max value + date.
         """
         return peak("recovered", self.__class__.__name__)
-        # country = findCountry()
-        # peaks = getPeaks(country)
-        # if peaks.status_code == 404:
-        #     return {}
-        # else:
-        #     recovered = json.loads(peaks.text)["timeline"]["recovered"]
-        #     date, value = getMax(recovered)
-        # return {"country": country, "method": self.__class__.__name__, "date": date, "value": value}
+
 
 
 class DeathsPeak(Resource):
@@ -126,14 +112,7 @@ class DeathsPeak(Resource):
         :return: the max value + date.
         """
         return peak("deaths", self.__class__.__name__)
-        # country = findCountry()
-        # peaks = getPeaks(country)
-        # if peaks.status_code == 404:
-        #     return {}
-        # else:
-        #     deaths = json.loads(peaks.text)["timeline"]["deaths"]
-        #     date, value = getMax(deaths)
-        # return jsonify({"country": country, "method": self.__class__.__name__, "date": date, "value": value})
+
 
 
 class Status(Resource):
@@ -147,7 +126,10 @@ class Status(Resource):
         ret_status = requests.get(check_api).status_code
         # success
         if ret_status == 200:
-            return {'status': "success"}
+             data = '{"status": "succes"}'
+            json_object = json.loads(data)
+            return str(json_object)
+            //return {'status': "success"}
         # fail
         return {'status': "fail"}
 
