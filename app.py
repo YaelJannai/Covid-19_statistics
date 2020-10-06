@@ -1,8 +1,8 @@
-import json
-
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_restful import Resource, Api
 import requests
+import json
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -73,7 +73,9 @@ def peak(val_type, func_name):
     else:
         new_cases = json.loads(peaks.text)["timeline"][val_type]
         date, value = getMax(new_cases)
-        return {"country": country, "method": func_name, "date": date, "value": value}
+        data = {"country": country, "method": func_name, "date": date, "value": value}
+        json_object = json.dumps(data)
+        return str(json.loads(json_object))
 
 
 class NewCasesPeak(Resource):
@@ -88,7 +90,6 @@ class NewCasesPeak(Resource):
         return peak("cases", self.__class__.__name__)
 
 
-
 class RecoveredPeak(Resource):
     """
     Class to handle request of Recovered Peak.
@@ -99,7 +100,6 @@ class RecoveredPeak(Resource):
         :return: the max value + date.
         """
         return peak("recovered", self.__class__.__name__)
-
 
 
 class DeathsPeak(Resource):
@@ -114,7 +114,6 @@ class DeathsPeak(Resource):
         return peak("deaths", self.__class__.__name__)
 
 
-
 class Status(Resource):
     """
     Method to return a value of success / fail to contact the backend API.
@@ -126,16 +125,11 @@ class Status(Resource):
         ret_status = requests.get(check_api).status_code
         # success
         if ret_status == 200:
-            data = '{"status": "succes"}'
-            json_object = json.loads(data)
+            json_object = json.loads('{"status": "success"}')
             return str(json_object)
-            # mydata = json.loads('{"status": "succes"}')
-            # return str(json.dumps(mydata))
-            # print(mydata)
-            # return str({"status": "success"})
         # fail
-        return str({'status': "fail"})
-
+        json_object = json.loads('{"status": "fail"}')
+        return str(json_object)
 
 
 class HandleErrors(Resource):
