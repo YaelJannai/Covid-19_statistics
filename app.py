@@ -66,13 +66,18 @@ def peak(val_type, func_name):
     :param func_name: the method the user entered.
     :return: the data scrape from the API.
     """
+    # get the country the user wanted
     country = findCountry()
+    # get all peaks type
     peaks = getPeaks(country)
+    # if country is not valid
     if peaks.status_code == 404:
         return {}
     else:
-        new_cases = json.loads(peaks.text)["timeline"][val_type]
-        date, value = getMax(new_cases)
+        # get specific cases for the query
+        cases = json.loads(peaks.text)["timeline"][val_type]
+        # get max value and corresponding date
+        date, value = getMax(cases)
         data = {"country": country, "method": func_name, "date": date, "value": value}
         json_object = json.dumps(data)
         return str(json.loads(json_object))
