@@ -41,7 +41,7 @@ pipeline {
                         }
                     }
                 }
-		 stage('Test') {
+		        stage('Test') {
                     steps {
                         sh 'sleep 2'
                         script {
@@ -53,6 +53,13 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+    }
+    post {
+        aborted {
+            script {
+                return
             }
         }
     }
