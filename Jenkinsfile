@@ -48,11 +48,9 @@ pipeline {
                     }
                     post {
                         always {
-                            withEnv(["HOME=${env.WORKSPACE}"]) {
-                                sh 'exit 0'
-                                Thread.getAllStackTraces().keySet().each() {
-                                  t -> if (t.getName()=="Covid-19_statistics job" ) {   t.interrupt();  }
-                                }
+                            script {
+                                currentBuild.result = 'ABORTED'
+                                return
                             }
                         }
                     }
