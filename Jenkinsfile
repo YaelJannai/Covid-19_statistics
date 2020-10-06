@@ -44,14 +44,8 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-                        }
-                    }
-                    post {
-                        always {
-                            script {
-                                currentBuild.result = 'SUCCESS'
-                                return
-                            }
+                            currentBuild.result = 'ABORTED'
+                            return
                         }
                     }
                 }
