@@ -31,8 +31,8 @@ pipeline {
             }
         }
         stage('Run') {
-            withEnv(["HOME=${env.WORKSPACE}"]) {
-                parallel {
+            parallel {
+                withEnv(["HOME=${env.WORKSPACE}"]) {
                     stage('Server') {
                         steps {
                                 sh 'python app.py'
