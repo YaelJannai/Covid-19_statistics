@@ -34,19 +34,12 @@ pipeline {
             parallel {
                 stage('Server') {
                     steps {
-                        withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh 'python app.py'
-                        }
-                    }
-                    post {
-                        always {
-                            script{
-                                currentBuild.result = 'SUCCESS'
-                                return
+                        timeout(time: 2, unit: 'MINUTES') {
+                            withEnv(["HOME=${env.WORKSPACE}"]) {
+                                sh 'python app.py'
                             }
                         }
                     }
-                }
 		        stage('Test') {
                     steps {
                         sh 'sleep 2'
