@@ -40,6 +40,7 @@ pipeline {
                             }
                         }
                     }
+                }
 		        stage('Test') {
                     steps {
                         sh 'sleep 2'
