@@ -1,8 +1,7 @@
 #!/usr/bin/env groovy
 
-/**
- * Jenkinsfile
- */
+//Jenkinsfile
+
 
 pipeline {
     agent {
@@ -19,7 +18,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/YaelJannai/Covid-19_statistics.git'
             }
         }
-        stage('Setup') { // Install any dependencies you need to perform testing
+        stage('Setup') { // Install any dependencies to perform testing - install packages
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh '''
@@ -32,16 +31,16 @@ pipeline {
         }
         stage('Run') {
             parallel {
-                stage('Server') {
+                stage('Server') { // Start the server
                     steps {
-                        timeout(time: 2, unit: 'MINUTES') {
+                        timeout(time: 3, unit: 'MINUTES') {
                             withEnv(["HOME=${env.WORKSPACE}"]) {
                                 sh 'python app.py'
                             }
                         }
                     }
                 }
-		        stage('Test') {
+		        stage('Test') { // Run all the queries from input
                     steps {
                         sh 'sleep 2'
                         script {
