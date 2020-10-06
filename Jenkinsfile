@@ -39,9 +39,11 @@ pipeline {
                                 sh 'python app.py'
                             }
                         }
-                        currentBuild.result = 'SUCCESS'
-                        sh 'exit 0'
-                        return
+                        script {
+                            currentBuild.result = 'SUCCESS'
+                            sh 'exit 0'
+                            return
+                        }
                     }
                 }
 		        stage('Test') {
