@@ -47,9 +47,11 @@ pipeline {
                         }
                     }
                     stage('example') {
-                        script {
-                            setBuildResult('SUCCESS')
-                            return
+                        steps {
+                            script {
+                                setBuildResult('SUCCESS')
+                                return                            
+                            }
                         }
                     }
                 }
