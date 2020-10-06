@@ -14,11 +14,11 @@ The service's job:
 	** status - Returns a value of success / fail to contact the backend API.
 
 Examples for python script:
-   - request:     curl localhost:5000/status
-   - response: 	  {“status”: “success”}
+   - **request**:     curl localhost:5000/status
+   - **response**: 	  {“status”: “success”}
     
-   - request:     curl localhost:5000/deathsPeak?country=spain
-   - response:	  {"country": "spain", "method": "RecoveredPeak", "date": "9/30/20", "value": 380}
+   - **request**:     curl localhost:5000/deathsPeak?country=spain
+   - **response**:	  {"country": "spain", "method": "RecoveredPeak", "date": "9/30/20", "value": 380}
    
    
 ## Jenkins Job:
