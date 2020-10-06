@@ -36,6 +36,7 @@ pipeline {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
                             sh 'python app.py'
+                            sh 'exit 0'
                         }
                     }
                     post {
