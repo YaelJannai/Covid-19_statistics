@@ -50,7 +50,7 @@ pipeline {
                                     sh "curl localhost:5000/${item}"
                                 }
                             }
-                            sh 'exit 0'
+                            sh 'pkill -9 -f app.py'
                         }
                     }
                 }
