@@ -13,6 +13,9 @@ pipeline {
     parameters {
         string(name: 'Values', defaultValue: 'status', description: '')
     }
+    environment {
+        finish = false
+    }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
             steps {
@@ -48,21 +51,19 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-                            if(true) {
+                            ${finish} = true
+                        }
+                    }
+                }
+                stage('Finish') {
+                    steps {
+                        script {
+                            if(${finish}) {
                                 currentBuild.result = 'SUCCESS'
                                 return
                             }
                         }
                     }
-                }
-            }
-        }
-        stage ('Finish') {
-            steps {
-                script {
-                    if(currentBuild.result == 'SUCCESS') {
-                        return //this will exit the pipeline
-                    }        
                 }
             }
         }
