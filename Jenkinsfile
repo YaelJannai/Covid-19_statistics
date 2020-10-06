@@ -22,11 +22,7 @@ pipeline {
         stage('Setup') { // Install any dependencies you need to perform testing
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh '''
-		    	pip install requests
-			pip install Flask
-			pip install Flask_RESTful
-		    '''
+                    sh 'pip3 install --user -r requirements.txt'
                 }
             }
         }
@@ -39,7 +35,7 @@ pipeline {
                         }
                     }
                 }
-		stage('Test') {
+		        stage('Test') {
                     steps {
                         sh 'sleep 2'
                         script {
@@ -48,10 +44,16 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-				currentBuild.rawBuild.@result = hudson.model.Result.SUCCESS
+                            if(true) {
+                                currentBuild.result = 'SUCCESS'
+                                return
+                            }
                         }
                     }
                 }
+            }
+            if(currentBuild.result == 'SUCCESS') {
+                return //this will exit the pipeline
             }
         }
     }
