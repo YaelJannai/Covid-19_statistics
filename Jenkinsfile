@@ -59,8 +59,10 @@ pipeline {
         }
         stage ('Finish') {
             steps {
-                if(currentBuild.result == 'SUCCESS') {
-                    return //this will exit the pipeline
+                script {
+                    if(currentBuild.result == 'SUCCESS') {
+                        return //this will exit the pipeline
+                    }        
                 }
             }
         }
