@@ -52,10 +52,12 @@ pipeline {
                         }
                     }
                     post {
-                        script {
-                            if(${finish}) {
-                                currentBuild.result = 'SUCCESS'
-                                return
+                        success {
+                            script {
+                                if(${finish}) {
+                                    currentBuild.result = 'SUCCESS'
+                                    return
+                                }
                             }
                         }
                     }
