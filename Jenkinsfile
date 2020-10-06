@@ -13,9 +13,7 @@ pipeline {
     parameters {
         string(name: 'Values', defaultValue: 'status', description: '')
     }
-    environment {
-        finish = false
-    }
+    def finish = false
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
             steps {
