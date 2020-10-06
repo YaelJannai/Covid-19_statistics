@@ -51,7 +51,7 @@ pipeline {
                         }
                         withEnv(["HOME=${env.WORKSPACE}"]) {
                             sh '''
-                            ps -ef | grep "python app.py" | awk '{print $2}' | xargs kill
+                            ps -ef | grep "app.py" | awk '{print $2}' | xargs kill
                             '''
                         }
                     }
