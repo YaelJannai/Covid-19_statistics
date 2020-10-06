@@ -53,6 +53,8 @@ pipeline {
                             sh '''
                             pkill -9 -f app.py
                             '''
+                            currentBuild.result = 'SUCCESS'
+                            return
                         }
                     }
                 }
