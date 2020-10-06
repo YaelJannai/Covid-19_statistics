@@ -55,15 +55,15 @@ pipeline {
                             '''
                         }
                     }
+                    post {
+                        always {
+                            script{
+                                currentBuild.result = 'SUCCESS'
+                                return
+                            }
+                        }
+                    }
                 }
-            }
-        }
-        post {
-            always {
-                script{
-                    currentBuild.result = 'SUCCESS'
-                    return
-                }         
             }
         }
     }
