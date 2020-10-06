@@ -56,10 +56,12 @@ pipeline {
                     }
                 }
             }
-            script {
+        }
+        stage ('Finish') {
+            steps {
                 if(currentBuild.result == 'SUCCESS') {
                     return //this will exit the pipeline
-                }            
+                }
             }
         }
     }
