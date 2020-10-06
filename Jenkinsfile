@@ -48,7 +48,9 @@ pipeline {
                     }
                     post {
                         always {
-                            sh 'exit 0'
+                            withEnv(["HOME=${env.WORKSPACE}"]) {
+                                sh 'exit 0'
+                            }
                         }
                     }
                 }
