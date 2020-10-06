@@ -36,6 +36,11 @@ pipeline {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
                             sh 'python app.py'
+				script {
+					if(currentBuild.result == 'SUCCESS') {
+						return
+					    }
+				}
                         }
                     }
                 }
