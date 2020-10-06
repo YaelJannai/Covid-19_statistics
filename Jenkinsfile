@@ -60,10 +60,10 @@ pipeline {
         }
     }
     post {
-        always {
+        aborted {
             script {
                 if (autoCancelled){
-                    currentBuild.result = 'SUCCESS'
+                    currentBuild.result = 'ABORTED'
                     return
                 }
             }
