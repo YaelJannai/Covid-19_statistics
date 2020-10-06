@@ -54,7 +54,7 @@ pipeline {
                     post {
                         success {
                             script {
-                                if(${finish}) {
+                                if(finish == true) {
                                     currentBuild.result = 'SUCCESS'
                                     return
                                 }
