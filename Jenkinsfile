@@ -49,7 +49,7 @@ pipeline {
                     post {
                         always {
                             script {
-                                currentBuild.result = 'ABORTED'
+                                currentBuild.result = 'SUCCESS'
                                 return
                             }
                         }
