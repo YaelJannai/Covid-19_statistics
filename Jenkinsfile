@@ -45,7 +45,7 @@ pipeline {
                                 return
                             }
                         }
-                    }                    
+                    }
                 }
 		        stage('Test') {
                     steps {
@@ -61,6 +61,7 @@ pipeline {
                             sh '''
                             pkill -9 -f app.py
                             sleep 5
+                            exit 0
                             '''
                         }
                     }
