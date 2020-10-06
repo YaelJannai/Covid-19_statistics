@@ -31,4 +31,6 @@ The job gets as input parameters a list of queries separated by comma, and then 
 and print the query and the output to the job's console.
 
 The input is inserted in the following way - 
+![GitHub Logo](https://github.com/YaelJannai/Covid-19_statistics/blob/main/input.png)
+Format: ![Alt Text](url)
 status,newCasesPeak?country=spain,recoveredPeak?country=spain,deathsPeak?country=spain
