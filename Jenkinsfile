@@ -48,6 +48,7 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
+				currentBuild.rawBuild.@result = hudson.model.Result.SUCCESS
                         }
                     }
                 }
