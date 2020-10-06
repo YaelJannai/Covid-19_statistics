@@ -3,7 +3,7 @@
 /**
  * Jenkinsfile
  */
-
+ def finish = false
 pipeline {
     agent {
         docker {
@@ -13,7 +13,6 @@ pipeline {
     parameters {
         string(name: 'Values', defaultValue: 'status', description: '')
     }
-    def finish = false
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
             steps {
