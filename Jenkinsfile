@@ -46,13 +46,9 @@ pipeline {
                             }
                         }
                     }
-                    stage('example') {
-                        steps {
-                            script {
-                                setBuildResult('SUCCESS')
-                                return                            
-                            }
-                        }
+                    script {
+                        setBuildResult('SUCCESS')
+                        return
                     }
                 }
             }
