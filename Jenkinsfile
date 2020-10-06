@@ -36,7 +36,6 @@ pipeline {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
                             sh 'python app.py'
-                            sh 'exit 0'
                         }
                     }
                     post {
@@ -57,13 +56,6 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-                        }
-                        withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh '''
-                            pkill -9 -f app.py
-                            sleep 5
-                            exit 0
-                            '''
                         }
                     }
                 }
