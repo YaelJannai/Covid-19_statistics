@@ -51,9 +51,7 @@ pipeline {
                             finish = true
                         }
                     }
-                }
-                stage('Finish') {
-                    steps {
+                    post {
                         script {
                             if(${finish}) {
                                 currentBuild.result = 'SUCCESS'
