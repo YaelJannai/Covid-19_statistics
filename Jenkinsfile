@@ -3,7 +3,7 @@
 /**
  * Jenkinsfile
  */
- def finish = false
+ def autoCancelled = false
 pipeline {
     agent {
         docker {
@@ -39,6 +39,9 @@ pipeline {
                                 sh 'python app.py'
                             }
                         }
+                        script{
+                            autoCancelled = true
+                        }
                     }
                 }
 		        stage('Test') {
@@ -59,8 +62,10 @@ pipeline {
     post {
         aborted {
             script {
-                currentBuild.result = 'SUCCESS'
-                return
+                if (autoCancelled){
+                    currentBuild.result = 'SUCCESS'
+                    return
+                }
             }
         }
     }
