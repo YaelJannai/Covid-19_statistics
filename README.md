@@ -31,4 +31,4 @@ The job gets as input parameters a list of queries separated by comma, and then 
 and print the query and the output to the job's console.
 
 The input is inserted in the following way - 
-status**,**newCasesPeak?country=spain**,**recoveredPeak?country=spain**,**deathsPeak?country=spain
+status,newCasesPeak?country=spain,recoveredPeak?country=spain,deathsPeak?country=spain
