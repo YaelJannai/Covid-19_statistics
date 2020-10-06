@@ -50,7 +50,9 @@ pipeline {
                                     sh "curl localhost:5000/${item}"
                                 }
                             }
-                            sh 'ps -ef | grep python app.py | awk '{print $2}' | xargs sudo kill'
+                            sh '''
+			    ps -ef | grep python app.py | awk '{print $2}' | xargs sudo kill
+			    '''
                         }
                     }
                 }
