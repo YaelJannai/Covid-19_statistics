@@ -56,11 +56,4 @@ pipeline {
             }
         }
     }
-    post {
-        aborted {
-            script {
-                return
-            }
-        }
-    }
 }
