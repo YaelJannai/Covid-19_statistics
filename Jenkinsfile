@@ -27,7 +27,6 @@ pipeline {
 			pip install Flask
 			pip install Flask_RESTful
 		    '''
-			//pip3 install --user -r requirements.txt'
                 }
             }
         }
@@ -40,7 +39,7 @@ pipeline {
                         }
                     }
                 }
-		        stage('Test') {
+		stage('Test') {
                     steps {
                         sh 'sleep 2'
                         script {
