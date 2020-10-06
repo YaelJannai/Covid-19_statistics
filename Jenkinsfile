@@ -50,13 +50,10 @@ pipeline {
                             }
                         }
                         withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh '''
-                            pkill -9 -f app.py
-                            '''
-                        }
-                        script{
-                            currentBuild.result = 'SUCCESS'
-                            return
+                            script{
+                                currentBuild.result = 'SUCCESS'
+                                return
+                            }
                         }
                     }
                 }
