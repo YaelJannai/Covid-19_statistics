@@ -36,11 +36,6 @@ pipeline {
                     steps {
                         withEnv(["HOME=${env.WORKSPACE}"]) {
                             sh 'python app.py'
-				script {
-					if(currentBuild.result == 'SUCCESS') {
-						return
-					    }
-				}
                         }
                     }
                 }
@@ -53,12 +48,8 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-                            finish = true
-                            if(finish == true) {
-                                currentBuild.result = 'SUCCESS'
-                                return
-                            }
                         }
+                        sh 'kill app.py'
                     }
                 }
             }
