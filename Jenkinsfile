@@ -39,11 +39,6 @@ pipeline {
                                 sh 'python app.py'
                             }
                         }
-                        script {
-                            currentBuild.result = 'SUCCESS'
-                            sh 'exit 0'
-                            return
-                        }
                     }
                 }
 		        stage('Test') {
@@ -58,6 +53,14 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+    }
+    post {
+        aborted {
+            script {
+                currentBuild.result = 'SUCCESS'
+                return
             }
         }
     }
