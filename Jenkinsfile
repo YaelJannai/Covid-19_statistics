@@ -32,22 +32,24 @@ pipeline {
         }
         stage('Run') {
             parallel {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    stage('Server') {
-                        steps {
-                                sh 'python app.py'
+                stage('Server') {
+                    steps {
+                        withEnv(["HOME=${env.WORKSPACE}"]) {
+                            sh 'python app.py'
                         }
                     }
-		            stage('Test') {
-                        steps {
-                            sh 'sleep 2'
-                            script {
-                                def list = "${params.Values}".tokenize(',')
-                                for (int i = 0; i < list.size(); i++) {
-                                    def item = list[i]
-                                    sh "curl localhost:5000/${item}"
-                                }
+                }
+		        stage('Test') {
+                    steps {
+                        sh 'sleep 2'
+                        script {
+                            def list = "${params.Values}".tokenize(',')
+                            for (int i = 0; i < list.size(); i++) {
+                                def item = list[i]
+                                sh "curl localhost:5000/${item}"
                             }
+                        }
+                        withEnv(["HOME=${env.WORKSPACE}"]) {
                             sh '''
                             ps -ef | grep "python app.py" | awk '{print $2}' | xargs kill
                             '''
