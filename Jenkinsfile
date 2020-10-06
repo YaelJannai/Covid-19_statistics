@@ -22,7 +22,11 @@ pipeline {
         stage('Setup') { // Install any dependencies you need to perform testing
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    sh 'pip3 install --user -r requirements.txt'
+                    sh '''
+                    pip install Flask
+                    pip install Flask_RESTful
+                    pip install requests
+                    '''
                 }
             }
         }
