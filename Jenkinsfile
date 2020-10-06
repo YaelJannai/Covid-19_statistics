@@ -56,6 +56,9 @@ pipeline {
                     }
                 }
             }
+            if(currentBuild.result == 'SUCCESS') {
+                return //this will exit the pipeline
+            }
         }
     }
 }
