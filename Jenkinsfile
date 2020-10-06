@@ -49,7 +49,7 @@ pipeline {
                                 def item = list[i]
                                 sh "curl localhost:5000/${item}"
                             }
-                            ${finish} = true
+                            finish = true
                         }
                     }
                 }
