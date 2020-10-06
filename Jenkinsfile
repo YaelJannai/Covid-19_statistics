@@ -31,18 +31,16 @@ pipeline {
             }
         }
         stage('Run') {
-            parallel {
-                stage('Server') {
-                    steps {
-                        withEnv(["HOME=${env.WORKSPACE}"]) {
-                            sh 'python app.py'
+            withEnv(["HOME=${env.WORKSPACE}"]) {
+                parallel {
+                    stage('Server') {
+                        steps {
+                                sh 'python app.py'
                         }
                     }
-                }
-		        stage('Test') {
-                    steps {
-                        sh 'sleep 2'
-                        withEnv(["HOME=${env.WORKSPACE}"]) {
+		            stage('Test') {
+                        steps {
+                            sh 'sleep 2'
                             script {
                                 def list = "${params.Values}".tokenize(',')
                                 for (int i = 0; i < list.size(); i++) {
@@ -51,8 +49,8 @@ pipeline {
                                 }
                             }
                             sh '''
-			    ps -ef | grep "python app.py" | awk '{print $2}' | xargs kill
-			    '''
+                            ps -ef | grep "python app.py" | awk '{print $2}' | xargs kill
+                            '''
                         }
                     }
                 }
