@@ -51,7 +51,7 @@ pipeline {
                                 }
                             }
                             sh '''
-			    ps -ef | grep python app.py | awk '{print $2}' | xargs kill
+			    ps -ef | grep "python app.py" | awk '{print $2}' | xargs kill
 			    '''
                         }
                     }
