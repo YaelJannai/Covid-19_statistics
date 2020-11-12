@@ -16,11 +16,16 @@ def findCountry():
     Find the country from the user input url.
     :return: the country name
     """
-    # get the country from the user input
-    country = request.args.get("country")
-    # in case the country is written in upper case
-    country = country.lower()
-    return country
+    # verify first that the user entered the country argument
+    if 'country' in request.args:
+        # get the country from the user input
+        country = request.args.get("country")
+        # in case the country is written in upper case
+        country = country.lower()
+        return country
+    # default value for errors - empty string
+    else:
+        return ""
 
 
 def getPeaks(country):
@@ -43,14 +48,14 @@ def getMax(cases_dict):
     :return: Returns the date and value of the highest peak from dictionary.
     """
     # get values from dictionary
-    val_dict = list(cases_dict.values())
+    val_list = list(cases_dict.values())
     # get keys from dictionary
     key_list = list(cases_dict.keys())
     count = 1
     # new dictionary for the differance
     diff_dict = {}
     # calculate difference because it is originally held as accumulated value
-    for val1, val2 in zip(val_dict[0::], val_dict[1::]):
+    for val1, val2 in zip(val_list[0::], val_list[1::]):
         # calculate differance between each 2 adjacent values
         diff_dict[key_list[count]] = val2 - val1
         count += 1
@@ -68,6 +73,9 @@ def peak(val_type, func_name):
     """
     # get the country the user wanted
     country = findCountry()
+    # if the user didn't insert any country
+    if country == "":
+        return {}
     # get all peaks type
     peaks = getPeaks(country)
     # if country is not valid
@@ -75,9 +83,9 @@ def peak(val_type, func_name):
         return {}
     else:
         # get specific cases for the query
-        cases = json.loads(peaks.text)["timeline"][val_type]
+        type_peak = json.loads(peaks.text)["timeline"][val_type]
         # get max value and corresponding date
-        date, value = getMax(cases)
+        date, value = getMax(type_peak)
         data = {"country": country, "method": func_name, "date": date, "value": value}
         json_object = json.dumps(data)
         return str(json.loads(json_object))
